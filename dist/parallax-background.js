@@ -1,6 +1,15 @@
 'use strict';
 
-jQuery(function($) {
+! function($) {
+
+$.fn.parallaxBackground = function(options) {
+  /**
+   * Check if image parameter is set
+   */
+  if(! options.image) {
+    return;
+  }
+
   /**
    * Check if device is running on iOS7,
    * because DOM painting is paused during scroll events
@@ -16,15 +25,16 @@ jQuery(function($) {
     return;
   }
 
-  var $elements = $('.example');
+  var $elements = this;
 
   if(! $elements.length) {
     return;
   }
 
-  var windowElement = $(window);
-  var windowHeight = windowElement.height();
-  var items = [];
+  var items = [],
+      scrollTop,
+      windowElement = $(window),
+      windowHeight = windowElement.height();
 
   /**
    * Initialize function,
@@ -37,11 +47,15 @@ jQuery(function($) {
     windowHeight = windowElement.height();
 
     $elements.each(function(key) {
-      var $element = $(this);
-      var $image = $element.find('.image');
+      var $element = $(this),
+          $image = $element.find(options.image);
+
+      if(! $image.length) {
+        return false;
+      }
 
       /**
-       * Support initially hidden elements to avoid unstyled flash
+       * Show initially hidden elements to support avoidance of unstyled flash
        */
       $image.show();
 
@@ -80,7 +94,7 @@ jQuery(function($) {
   requestAnimationFrame(parallax);
 
   function parallax() {
-    var scrollTop = windowElement.scrollTop();
+    scrollTop = windowElement.scrollTop();
 
     /**
      * Separate calculations for each element
@@ -90,8 +104,8 @@ jQuery(function($) {
        * Check when element is in and out of sight,
        * for precise animations and avoiding execution when element is not visible
        */
-      var inSight = scrollTop >= item.distanceToVisible;
-      var outOfSight = scrollTop >= (item.height + item.offset);
+      var inSight = scrollTop >= item.distanceToVisible,
+          outOfSight = scrollTop >= (item.height + item.offset);
 
       if(inSight && ! outOfSight) {
         var scrollAmount = scrollTop - item.distanceToVisible;
@@ -106,8 +120,8 @@ jQuery(function($) {
          * Calculate pixel amount to be animated,
          * and round off unnecessary precise amount for better performance
          */
-        var animatePerPixel = item.parallaxSpace / item.scrollSpace;
-        var translate = (scrollAmount * animatePerPixel).toFixed(2);
+        var animatePerPixel = item.parallaxSpace / item.scrollSpace,
+            translate = (scrollAmount * animatePerPixel).toFixed(2);
 
         /**
          * Invert amount for more parallax effect
@@ -115,11 +129,13 @@ jQuery(function($) {
         translate = translate * -1;
 
         item.$image.css({
-          'transform': 'translate3d(0, ' + translate + 'px, 0)'
+          'transform': 'translateY(' + translate + 'px)'
         });
       }
     });
 
     requestAnimationFrame(parallax);
   }
-});
+};
+
+}(jQuery);
