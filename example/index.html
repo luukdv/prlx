@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Parallax background example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <style>
+      body {
+        -webkit-font-smoothing: antialiased;
+        color: #3C3C3C;
+        font-family: 'Asap';
+        font-size: 18px;
+        line-height: 2.25;
+        margin: 0;
+      }
+
+      @media(min-width: 641px) {
+        body {
+          font-size: 24px;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      h2 {
+        font-size: 1.67em;
+        line-height: 1.5;
+        margin: 0 0 1em;
+      }
+
+      p {
+        margin: 0 0 1em;
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+
+      a {
+        color: #0099A9;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .content {
+        margin: 0 auto;
+        max-width: 740px;
+        padding: 3em 20px;
+        text-align: center;
+      }
+
+      @media(min-width: 641px) {
+        .content {
+          padding: 4em 40px;
+        }
+      }
+
+      .prlx {
+        background-color: #0099A9;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .prlx1 {
+        height: 70vh;
+      }
+
+      .prlx2,
+      .prlx3 {
+        height: 40vh;
+      }
+
+      .prlx4,
+      .prlx6 {
+        height: 100vh;
+      }
+
+      .prlx5 {
+        height: 30vh;
+      }
+
+      .img {
+        background-position: 50% 50%;
+        background-size: cover;
+        display: none;
+        position: absolute;
+        width: 100%;
+      }
+
+      .img1 {
+        background-image: url('images/1.jpg');
+        height: 90vh;
+        top: -10vh;
+      }
+
+      .img2,
+      .img3 {
+        height: 80vh;
+        top: -20vh;
+      }
+
+      .img2 {
+        background-image: url('images/2.jpg');
+      }
+
+      .img3 {
+        background-image: url('images/3.jpg');
+      }
+
+      .img4,
+      .img6 {
+        height: 120vh;
+        top: -10vh;
+      }
+
+      .img4 {
+        background-image: url('images/4.jpg');
+      }
+
+      .img5 {
+        background-image: url('images/5.jpg');
+        height: 70vh;
+        top: -20vh;
+      }
+
+      .img6 {
+        background-image: url('images/6.jpg');
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="prlx prlx1">
+      <div class="img img1"></div>
+    </div>
+
+    <div class="content">
+      <h2>Sed dapibus eros</h2>
+      <p>Quis pharetra consectetur. Curabitur sodales nunc ac dapibus aliquam. Integer et purus sed turpis interdum varius. Nulla facilisi. Nunc elementum interdum diam. Ut fringilla turpis sed neque porttitor vehicula. Vestibulum dapibus purus eget nunc vestibulum, ut maximus purus lobortis.</p>
+    </div>
+
+    <div class="prlx prlx2">
+      <div class="img img2"></div>
+    </div>
+
+    <div class="content">
+      <h2>Interdum et malesuada</h2>
+      <p>Fusce posuere libero ut nulla commodo tincidunt.</p>
+    </div>
+
+    <div class="prlx prlx3">
+      <div class="img img3"></div>
+    </div>
+
+    <div class="content">
+      <h2>Etiam aliquet</h2>
+      <p>Urna at nisi euismod, ut posuere odio lacinia. Duis sodales mi a faucibus pharetra. Mauris tempus feugiat finibus. Curabitur a dui vitae neque mollis pretium eget sed neque. Vestibulum nisi lectus, eleifend a justo viverra, euismod vulputate lectus. Suspendisse ac enim nibh. Donec molestie odio quis metus lacinia vehicula. Aenean purus sapien.</p>
+    </div>
+
+    <div class="prlx prlx4">
+      <div class="img img4"></div>
+    </div>
+
+    <div class="content">
+      <h2>Donec faucibus massa</h2>
+      <p>Curabitur enim libero, rutrum at varius eu, condimentum quis arcu. Mauris laoreet ex mi, quis sagittis enim rutrum vitae. Phasellus vestibulum faucibus tortor sit amet condimentum.</p>
+      <p>Aenean sed purus sollicitudin, porttitor dui eleifend, suscipit tellus. Aenean commodo a felis in tincidunt. Proin in posuere metus. Morbi bibendum molestie lectus.</p>
+    </div>
+
+    <div class="prlx prlx5">
+      <div class="img img5"></div>
+    </div>
+
+    <div class="content">
+      <h2>Example images</h2>
+      <p>The amazing images are by <a target="_blank" href="https://github.com/dmpop">dmpop (Dmitri Popov)</a>.</p>
+    </div>
+
+    <div class="prlx prlx6">
+      <div class="img img6"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
+    <script src="../dist/parallax-background.js"></script>
+    <script>
+      $('.prlx').parallaxBackground({
+        'image': '.img'
+      });
+    </script>
+  </body>
+</html>

@@ -13,7 +13,7 @@ bower install luukdv/parallax-background --save
 ### Manual
 
 ```html
-<script src="dist/parallax-background.js"></script>
+<script src="parallax-background.js"></script>
 ```
 
 ## Configuration
