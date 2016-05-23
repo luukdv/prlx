@@ -72,7 +72,7 @@ $image-height: 800px; // Example, can be anything
 
 ### Browser resizing
 
-Positions will be recalculated when the browser is resized. That means orientation changes on tablets and `media-query`s on the element can be done safely.
+Positions will be recalculated when the browser is resized. That means orientation changes on tablets and media queries on the element can be done safely.
 
 ### requestAnimationFrame
 
@@ -84,4 +84,4 @@ iOS 7 is not supported, since DOM painting is paused during scroll events which 
 
 ### Fallback
 
-The fallback is gracious, since the image will just be displayed normally.
+Fallback is gracious, since the image will just be displayed normally.
