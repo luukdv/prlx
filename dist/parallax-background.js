@@ -11,6 +11,11 @@ $.fn.parallaxBackground = function(options) {
   }
 
   /**
+   * Show initially hidden elements to support avoidance of unstyled flash
+   */
+  $(options.image).show();
+
+  /**
    * Check if device is running on iOS7,
    * because DOM painting is paused during scroll events
    */
@@ -53,11 +58,6 @@ $.fn.parallaxBackground = function(options) {
       if(! $image.length) {
         return false;
       }
-
-      /**
-       * Show initially hidden elements to support avoidance of unstyled flash
-       */
-      $image.show();
 
       var height = $element.height();
 
@@ -118,10 +118,10 @@ $.fn.parallaxBackground = function(options) {
 
         /**
          * Calculate pixel amount to be animated,
-         * and round off unnecessary precise amount for better performance
+         * and round off unnecessary precise amount
          */
         var animatePerPixel = item.parallaxSpace / item.scrollSpace,
-            translate = (scrollAmount * animatePerPixel).toFixed(2);
+            translate = (scrollAmount * animatePerPixel).toFixed(1);
 
         /**
          * Invert amount for more parallax effect

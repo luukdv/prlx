@@ -22,7 +22,7 @@ bower install luukdv/parallax-background --save
 
 | Option | Default value | Required | Description |
 | :--- | :--- | :--- | :--- |
-| `image` | `null` | true | Selector string which can be picked up by jQuery
+| `image` | `undefined` | Yes | Selector string which can be picked up by jQuery
 
 ## Usage
 
@@ -42,7 +42,7 @@ $('.example').parallaxBackground({
 
 ### Styling
 
-This plugin is intented to be used for image backgrounds. There has to be a parent element involved (to hide the parallax overflow), and a child element. See example above. Naturally, some styling has to be involved. There isn't any bundled CSS file or activated style through JavaScript, to give as much freedom as possible. However, these are the recommended style rules:
+This plugin is intented to be used for image backgrounds. There has to be a parent element (to hide the parallax overflow), and a child element. See example above. Naturally, some styling has to be involved. There isn't any bundled CSS file or activated style through JavaScript, to give as much freedom as possible. However, these are the recommended style rules:
 
 ```scss
 $element-height: 400px; // Example, can be anything
