@@ -61,6 +61,7 @@ $image-height: 800px; // Example, can be anything
     height: $image-height;
     position: absolute; /* 2 */
     top: -(($image-height - $element-height) / 2);
+    width: 100%; // Example, can be anything
   }
 }
 ```

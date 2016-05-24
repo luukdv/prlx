@@ -4,7 +4,12 @@
   <head>
     <title>Parallax background example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Asap:400,700">
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         -webkit-font-smoothing: antialiased;
         color: #3C3C3C;
@@ -18,10 +23,6 @@
         body {
           font-size: 24px;
         }
-      }
-
-      * {
-        box-sizing: border-box;
       }
 
       h2 {
@@ -66,6 +67,14 @@
         position: relative;
       }
 
+      .img {
+        background-position: 50% 50%;
+        background-size: cover;
+        display: none;
+        position: absolute;
+        width: 100%;
+      }
+
       .prlx1 {
         height: 70vh;
       }
@@ -82,14 +91,6 @@
 
       .prlx5 {
         height: 30vh;
-      }
-
-      .img {
-        background-position: 50% 50%;
-        background-size: cover;
-        display: none;
-        position: absolute;
-        width: 100%;
       }
 
       .img1 {
