@@ -45,8 +45,7 @@ $('.example').parallaxBackground({
 This plugin is intented to be used for image backgrounds. There has to be a parent element (to hide the parallax overflow), and a child element. See example above. Naturally, some styling has to be involved. There isn't any bundled CSS file or activated style through JavaScript, to give as much freedom as possible. However, these are the recommended style rules:
 
 ```scss
-$element-height: 400px; // Example, can be anything
-$image-height: 800px; // Example, can be anything
+$parallax-space: 20%; // Example, can be anything
 
 .example {
   height: $element-height;
@@ -55,12 +54,12 @@ $image-height: 800px; // Example, can be anything
 
   .img {
   	background-image: url('image.jpg');
-    background-position: 50% 50%;
+    background-position: 50%;
     background-size: cover;
     display: none; /* 1 */
-    height: $image-height;
+    height: 100% + $parallax-space;
     position: absolute; /* 2 */
-    top: -(($image-height - $element-height) / 2);
+    top: -($parallax-space / 2);
     width: 100%; // Example, can be anything
   }
 }
