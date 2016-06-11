@@ -10,10 +10,17 @@ $.fn.parallaxBackground = function(options) {
     return;
   }
 
+  var $images = $(options.image);
+
+  /**
+   * Create separate paint layers for each image
+   */
+  $images.css('will-change', 'transform');
+
   /**
    * Show initially hidden elements to support avoidance of unstyled flash
    */
-  $(options.image).show();
+  $images.show();
 
   /**
    * Check if device is running on iOS7,
@@ -38,18 +45,18 @@ $.fn.parallaxBackground = function(options) {
 
   var items = [],
       scrollTop,
-      windowElement = $(window),
-      windowHeight = windowElement.height();
+      $window = $(window),
+      windowHeight = $window.height();
 
   /**
    * Initialize function,
    * and call again on window resize to support element/window size changes
    */
   init();
-  windowElement.resize(init);
+  $window.resize(init);
 
   function init() {
-    windowHeight = windowElement.height();
+    windowHeight = $window.height();
 
     $elements.each(function(key) {
       var $element = $(this),
@@ -94,7 +101,7 @@ $.fn.parallaxBackground = function(options) {
   requestAnimationFrame(parallax);
 
   function parallax() {
-    scrollTop = windowElement.scrollTop();
+    scrollTop = $window.scrollTop();
 
     /**
      * Separate calculations for each element
@@ -128,9 +135,7 @@ $.fn.parallaxBackground = function(options) {
          */
         translate = translate * -1;
 
-        item.$image.css({
-          'transform': 'translateY(' + translate + 'px)'
-        });
+        item.$image.css('transform', 'translateY(' + translate + 'px)');
       }
     });
 

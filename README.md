@@ -1,4 +1,4 @@
-# Parallax Background
+# Parallax background
 
 A small (~500 bytes min + gzip), performance optimized jQuery plugin for parallax image backgrounds. Aims to be as straight forward and semantic as possible, without tricks, hacks, element clones, layout thrashing, etc.
 
