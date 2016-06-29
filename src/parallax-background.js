@@ -66,13 +66,13 @@ $.fn.parallaxBackground = function(options) {
         return false;
       }
 
-      var height = $element.height();
+      var height = $element.outerHeight();
 
       /**
        * Check the available space for parallax movements,
        * and continue to next element when there is none
        */
-      var parallaxSpace = $image.height() - height;
+      var parallaxSpace = $image.outerHeight() - height;
 
       if(parallaxSpace === 0) {
         return;
