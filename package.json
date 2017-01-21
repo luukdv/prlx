@@ -1,0 +1,21 @@
+{
+  "name": "prlx",
+  "version": "",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/luukdv/parallax-background",
+  "bugs": {
+    "url": "https://github.com/luukdv/parallax-background/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Luuk de Vlieger"
+  },
+  "main": "dist/prlx.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luukdv/parallax-background.git"
+  },
+  "scripts": {},
+  "devDependencies": {}
+}
