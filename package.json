@@ -17,7 +17,8 @@
     "url": "https://github.com/luukdv/parallax-background.git"
   },
   "scripts": {
-    "dev": "babel src/prlx.js -w -o dist/prlx.js"
+    "dev": "babel src/prlx.js -w -o dist/prlx.js",
+    "build": "uglifyjs dist/prlx.js -c -m -o dist/prlx.js"
   },
   "babel": {
     "presets": [
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
-    "babel-preset-es2015": "^6.22.0"
+    "babel-preset-es2015": "^6.22.0",
+    "uglify-js": "^2.7.5"
   }
 }
