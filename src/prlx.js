@@ -31,6 +31,12 @@
       return true;
     }
 
+    loop(callback) {
+      for (let i = 0; i < this.nodes.length; i++) {
+        callback(this.nodes[i]);
+      }
+    }
+
     show() {
       function display(node) {
         node.style.display = 'block';
@@ -42,17 +48,15 @@
         return;
       }
 
-      for (let i = 0; i < this.nodes.length; i++) {
-        display(this.nodes[i]);
-      }
+      this.loop(node => {
+        display(node);
+      });
     }
 
     register() {
       this.init();
 
-      window.addEventListener('resize', () => {
-        this.init();
-      });
+      window.addEventListener('resize', () => this.init());
     }
 
     init() {}
