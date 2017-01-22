@@ -104,25 +104,42 @@
     calculate() {
       const windowHeight = window.innerHeight;
 
-      this.items.forEach(item => {
-        const height = this.getHeight(item.parent);
-        const offset = item.parent.offsetTop;
+      this.items.forEach(i => {
+        const height = this.getHeight(i.parent);
+        const offset = i.parent.offsetTop;
 
-        item.distanceToVisible = offset - windowHeight;
-        item.height = height;
-        item.offset = item.parent.offsetTop;
-        item.parallaxSpace = this.getHeight(item.image) - height;
-        item.scrollSpace = height + windowHeight;
+        i.distanceToVisible = offset - windowHeight;
+        i.height = height;
+        i.offset = i.parent.offsetTop;
+        i.parallaxSpace = this.getHeight(i.image) - height;
+        i.scrollSpace = height + windowHeight;
       });
+    }
+
+    animate(i, scrollTop) {
+      const inSight = scrollTop >= i.distanceToVisible;
+      const outOfSight = scrollTop >= (i.height + i.offset);
+
+      if (inSight && ! outOfSight) {
+        let scrollAmount = scrollTop - i.distanceToVisible;
+
+        scrollAmount = scrollAmount - (i.scrollSpace / 2);
+
+        const animatePerPixel = i.parallaxSpace / i.scrollSpace;
+        let translate = (scrollAmount * animatePerPixel).toFixed(1);
+
+        translate = translate * -1;
+
+        i.image.style.transform = `translateY(${translate}px`;
+      }
     }
 
     tick() {
       requestAnimationFrame(() => {
-        this.animate();
+        this.items.forEach(i => this.animate(i, window.pageYOffset));
+        this.tick();
       });
     }
-
-    animate() {}
 
     init() {
       this.tick();
