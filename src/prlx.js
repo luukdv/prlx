@@ -16,6 +16,7 @@
       }
 
       this.show();
+      this.register();
     }
 
     performChecks() {
@@ -45,6 +46,16 @@
         display(this.nodes[i]);
       }
     }
+
+    register() {
+      this.init();
+
+      window.addEventListener('resize', () => {
+        this.init();
+      });
+    }
+
+    init() {}
   }
 
   const exp = item => new Parallax(item);
