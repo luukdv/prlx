@@ -125,7 +125,7 @@
       }
 
       const visible = scrollTop - i.distanceToVisible;
-      const amount = visible - (i.scrollSpace / 2);
+      const amount = visible - (i.scrollSpace / 2); // Center at middle of viewport
       const animatePerPixel = i.parallaxSpace / i.scrollSpace;
       let translate = (amount * animatePerPixel).toFixed(1);
 
