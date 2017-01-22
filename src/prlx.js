@@ -31,7 +31,13 @@
       return true;
     }
 
-    loop(callback) {
+    loopNodes(callback) {
+      if (!this.nodes.length) {
+        callback(this.nodes);
+
+        return;
+      }
+
       for (let i = 0; i < this.nodes.length; i++) {
         callback(this.nodes[i]);
       }
@@ -42,13 +48,7 @@
         node.style.display = 'block';
       }
 
-      if (!this.nodes.length) {
-        display(this.nodes);
-
-        return;
-      }
-
-      this.loop(node => {
+      this.loopNodes(node => {
         display(node);
       });
     }
