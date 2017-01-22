@@ -19,7 +19,7 @@
   "scripts": {
     "dev": "babel src/prlx.js -w -o dist/prlx.js",
     "build": "uglifyjs dist/prlx.js -c -m -o dist/prlx.js",
-    "watch:test": "ava src/test.js --fail-fast -v -w"
+    "watch:test": "ava test/main.js --fail-fast -v -w"
   },
   "babel": {
     "presets": [
