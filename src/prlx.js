@@ -2,24 +2,37 @@
 
 ((root) => {
   class Parallax {
-    constructor(nodes) {
-      if (!nodes || typeof nodes !== 'object') {
-        return;
+    constructor(item, image) {
+      if (!item || !image) {
+        return false;
       }
 
-      this.nodes = nodes;
+      this.items = this.getNodes(item);
+      this.images = this.getNodes(image);
 
       if (!this.performChecks) {
         this.show();
 
-        return;
+        return false;
       }
 
       this.show();
       this.register();
     }
 
+    getNodes(selector) {
+      if (typeof selector !== 'string' || !selector.length) {
+        return false;
+      }
+
+      return document.querySelectorAll(selector);
+    }
+
     performChecks() {
+      if (!this.nodes) {
+        return false;
+      }
+
       if (/iP(ad|hone|od).*OS\s7.*/.test(navigator.userAgent)) {
         return false;
       }
@@ -31,15 +44,15 @@
       return true;
     }
 
-    loopNodes(callback) {
-      if (!this.nodes.length) {
-        callback(this.nodes);
+    loopNodes(nodes, callback) {
+      if (!nodes.length) {
+        callback(nodes);
 
         return;
       }
 
-      for (let i = 0; i < this.nodes.length; i++) {
-        callback(this.nodes[i]);
+      for (let i = 0; i < nodes.length; i++) {
+        callback(nodes[i]);
       }
     }
 
@@ -48,9 +61,7 @@
         node.style.display = 'block';
       }
 
-      this.loopNodes(node => {
-        display(node);
-      });
+      this.loopNodes(this.images, node => display(node));
     }
 
     register() {
@@ -62,7 +73,7 @@
     init() {}
   }
 
-  const exp = item => new Parallax(item);
+  const exp = (item, image) => new Parallax(item, image);
 
   if (typeof module === 'object') {
     module.exports = exp;
