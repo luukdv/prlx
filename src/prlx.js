@@ -2,13 +2,13 @@
 
 ((root) => {
   class Parallax {
-    constructor(item, image) {
-      if (!item || !image) {
+    constructor(item, args = {}) {
+      if (!item || typeof args !== 'object' || !args.image) {
         return false;
       }
 
       this.items = this.getNodes(item);
-      this.images = this.getNodes(image);
+      this.images = this.getNodes(args.image);
 
       if (!this.performChecks) {
         this.show();
@@ -73,7 +73,7 @@
     init() {}
   }
 
-  const exp = (item, image) => new Parallax(item, image);
+  const exp = (item, args) => new Parallax(item, args);
 
   if (typeof module === 'object') {
     module.exports = exp;
