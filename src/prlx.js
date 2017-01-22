@@ -143,6 +143,11 @@
     _init() {
       this._tick();
     }
+
+    // Public API
+    recalculate() {
+      this._calculate();
+    }
   }
 
   const exp = (item, args) => new Parallax(item, args);
