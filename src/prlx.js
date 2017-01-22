@@ -7,8 +7,8 @@
         return false;
       }
 
+      this.image = args.image;
       this.items = this.getNodes(item);
-      this.images = this.getNodes(args.image);
 
       if (!this.performChecks) {
         this.show();
@@ -25,11 +25,33 @@
         return false;
       }
 
-      return document.querySelectorAll(selector);
+      const nodes = document.querySelectorAll(selector);
+
+      if (!nodes.length) {
+        return false;
+      }
+
+      const items = [];
+
+      this.loopNodes(nodes, node => {
+        items.push({parent: node});
+      });
+
+      this.loop(items, item => {
+        const image = item.parent.querySelector(this.image);
+
+        if (!image) {
+          return false;
+        }
+
+        item.image = image;
+      });
+
+      return items;
     }
 
     performChecks() {
-      if (!this.nodes) {
+      if (!this.items) {
         return false;
       }
 
@@ -44,6 +66,12 @@
       return true;
     }
 
+    loop(items, callback) {
+      for (let i = 0; i < items.length; i++) {
+        callback(items[i]);
+      }
+    }
+
     loopNodes(nodes, callback) {
       if (!nodes.length) {
         callback(nodes);
@@ -51,9 +79,7 @@
         return;
       }
 
-      for (let i = 0; i < nodes.length; i++) {
-        callback(nodes[i]);
-      }
+      this.loop(nodes, callback);
     }
 
     show() {
@@ -61,7 +87,7 @@
         node.style.display = 'block';
       }
 
-      this.loopNodes(this.images, node => display(node));
+      this.loop(this.items, item => display(item.image));
     }
 
     register() {
