@@ -7,21 +7,21 @@
         return false;
       }
 
-      this.image = args.image;
-      this.items = this.getNodes(item);
+      this._image = args.image;
+      this._items = this._getNodes(item);
 
-      if (!this.performChecks()) {
-        this.show();
+      if (!this._performChecks()) {
+        this._show();
 
         return false;
       }
 
-      this.show();
-      this.register();
-      this.init();
+      this._show();
+      this._register();
+      this._init();
     }
 
-    getNodes(selector) {
+    _getNodes(selector) {
       if (typeof selector !== 'string' || !selector.length) {
         return false;
       }
@@ -34,12 +34,12 @@
 
       const items = [];
 
-      this.loopNodes(nodes, node => {
+      this._loopNodes(nodes, node => {
         items.push({parent: node});
       });
 
-      this.loop(items, item => {
-        const image = item.parent.querySelector(this.image);
+      this._loop(items, item => {
+        const image = item.parent.querySelector(this._image);
 
         if (!image) {
           return false;
@@ -51,11 +51,12 @@
       return items;
     }
 
-    performChecks() {
-      if (!this.items) {
+    _performChecks() {
+      if (!this._items) {
         return false;
       }
 
+      // DOM painting is paused during scroll events on iOS7
       if (/iP(ad|hone|od).*OS\s7.*/.test(navigator.userAgent)) {
         return false;
       }
@@ -67,56 +68,56 @@
       return true;
     }
 
-    loop(items, callback) {
+    _loop(items, callback) {
       for (let i = 0; i < items.length; i++) {
         callback(items[i]);
       }
     }
 
-    loopNodes(nodes, callback) {
+    _loopNodes(nodes, callback) {
       if (!nodes.length) {
         callback(nodes);
 
         return;
       }
 
-      this.loop(nodes, callback);
+      this._loop(nodes, callback);
     }
 
-    show() {
+    _show() {
       function display(node) {
         node.style.display = 'block';
       }
 
-      this.loop(this.items, item => display(item.image));
+      this._loop(this._items, item => display(item.image));
     }
 
-    register() {
-      this.calculate();
+    _register() {
+      this._calculate();
 
-      window.addEventListener('resize', () => this.calculate());
+      window.addEventListener('resize', () => this._calculate());
     }
 
-    getHeight(node) {
+    _getHeight(node) {
       return Math.floor(node.getBoundingClientRect().height);
     }
 
-    calculate() {
+    _calculate() {
       const windowHeight = window.innerHeight;
 
-      this.items.forEach(i => {
-        const height = this.getHeight(i.parent);
+      this._items.forEach(i => {
+        const height = this._getHeight(i.parent);
         const offset = i.parent.offsetTop;
 
         i.distanceToVisible = offset - windowHeight;
         i.height = height;
         i.offset = i.parent.offsetTop;
-        i.parallaxSpace = this.getHeight(i.image) - height;
+        i.parallaxSpace = this._getHeight(i.image) - height;
         i.scrollSpace = height + windowHeight;
       });
     }
 
-    animate(i, scrollTop) {
+    _animate(i, scrollTop) {
       const inSight = scrollTop >= i.distanceToVisible;
       const outOfSight = scrollTop >= (i.height + i.offset);
 
@@ -132,15 +133,15 @@
       i.image.style.transform = `translateY(${translate * -1}px`;
     }
 
-    tick() {
+    _tick() {
       requestAnimationFrame(() => {
-        this.items.forEach(i => this.animate(i, window.pageYOffset));
-        this.tick();
+        this._items.forEach(i => this._animate(i, window.pageYOffset));
+        this._tick();
       });
     }
 
-    init() {
-      this.tick();
+    _init() {
+      this._tick();
     }
   }
 
