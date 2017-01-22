@@ -18,6 +18,7 @@
 
       this.show();
       this.register();
+      this.init();
     }
 
     getNodes(selector) {
@@ -113,6 +114,18 @@
         item.parallaxSpace = this.getHeight(item.image) - height;
         item.scrollSpace = height + windowHeight;
       });
+    }
+
+    tick() {
+      requestAnimationFrame(() => {
+        this.animate();
+      });
+    }
+
+    animate() {}
+
+    init() {
+      this.tick();
     }
   }
 
