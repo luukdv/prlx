@@ -10,7 +10,7 @@
       this.image = args.image;
       this.items = this.getNodes(item);
 
-      if (!this.performChecks) {
+      if (!this.performChecks()) {
         this.show();
 
         return false;
@@ -120,18 +120,16 @@
       const inSight = scrollTop >= i.distanceToVisible;
       const outOfSight = scrollTop >= (i.height + i.offset);
 
-      if (inSight && ! outOfSight) {
-        let scrollAmount = scrollTop - i.distanceToVisible;
-
-        scrollAmount = scrollAmount - (i.scrollSpace / 2);
-
-        const animatePerPixel = i.parallaxSpace / i.scrollSpace;
-        let translate = (scrollAmount * animatePerPixel).toFixed(1);
-
-        translate = translate * -1;
-
-        i.image.style.transform = `translateY(${translate}px`;
+      if (!inSight || outOfSight) {
+        return;
       }
+
+      const visible = scrollTop - i.distanceToVisible;
+      const amount = visible - (i.scrollSpace / 2);
+      const animatePerPixel = i.parallaxSpace / i.scrollSpace;
+      let translate = (amount * animatePerPixel).toFixed(1);
+
+      i.image.style.transform = `translateY(${translate * -1}px`;
     }
 
     tick() {
