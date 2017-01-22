@@ -91,12 +91,29 @@
     }
 
     register() {
-      this.init();
+      this.calculate();
 
-      window.addEventListener('resize', () => this.init());
+      window.addEventListener('resize', () => this.calculate());
     }
 
-    init() {}
+    getHeight(node) {
+      return Math.floor(node.getBoundingClientRect().height);
+    }
+
+    calculate() {
+      const windowHeight = window.innerHeight;
+
+      this.items.forEach(item => {
+        const height = this.getHeight(item.parent);
+        const offset = item.parent.offsetTop;
+
+        item.distanceToVisible = offset - windowHeight;
+        item.height = height;
+        item.offset = item.parent.offsetTop;
+        item.parallaxSpace = this.getHeight(item.image) - height;
+        item.scrollSpace = height + windowHeight;
+      });
+    }
   }
 
   const exp = (item, args) => new Parallax(item, args);
