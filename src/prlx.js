@@ -135,7 +135,9 @@
 
     _tick() {
       requestAnimationFrame(() => {
-        this._items.forEach(i => this._animate(i, window.pageYOffset));
+        const scrollTop = window.pageYOffset;
+
+        this._items.forEach(i => this._animate(i, scrollTop));
         this._tick();
       });
     }
