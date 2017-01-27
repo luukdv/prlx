@@ -99,7 +99,7 @@
     }
 
     _getHeight(node) {
-      return Math.floor(node.getBoundingClientRect().height);
+      return node.getBoundingClientRect().height;
     }
 
     _calculate() {
