@@ -1,14 +1,26 @@
 'use strict';
 
-import * as phantom from 'phantom';
+import path from 'path';
+import phantom from 'phantom';
 import test from 'ava';
 
-const page = new Promise(resolve => {
-  phantom.create()
-    .then(p => p.createPage())
-    .then(p => {
-      resolve(p.evaluate(function() {
-        return this;
-      }));
-    });
+const script = path.normalize(__dirname + '/../dist/prlx.js');
+
+function evaluate(cb) {
+ return new Promise(resolve => {
+    phantom.create()
+      .then(ph => ph.createPage())
+      .then(page => page.injectJs(script)
+        .then(() => page)
+        .then(page => resolve(page.evaluate(cb)))
+      );
+  });
+}
+
+test('Function should be available', t => {
+  return evaluate(function() {
+    return typeof window.prlx;
+  }).then(r => {
+    t.is(r, 'function');
+  });
 });
