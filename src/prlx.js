@@ -61,7 +61,7 @@
         return false;
       }
 
-      if (!window.requestAnimationFrame) {
+      if (!requestAnimationFrame) {
         return false;
       }
 
