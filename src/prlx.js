@@ -21,8 +21,12 @@
       this._init();
     }
 
+    _checkSelector(selector) {
+      return (typeof selector === 'string' && selector.length);
+    }
+
     _getNodes(selector) {
-      if (typeof selector !== 'string' || !selector.length) {
+      if (!this._checkSelector(selector) || !this._checkSelector(args.image)) {
         return false;
       }
 
@@ -39,13 +43,7 @@
       });
 
       this._loop(items, item => {
-        const image = item.parent.querySelector(this._image);
-
-        if (!image) {
-          return false;
-        }
-
-        item.image = image;
+        item.image = item.parent.querySelector(this._image);
       });
 
       return items;
@@ -75,6 +73,7 @@
     }
 
     _loopNodes(nodes, callback) {
+      // Check if it's a single node
       if (!nodes.length) {
         callback(nodes);
 
@@ -106,6 +105,10 @@
       const windowHeight = window.innerHeight;
 
       this._items.forEach(i => {
+        if (!i.image) {
+          return;
+        }
+
         const height = this._getHeight(i.parent);
         const offset = i.parent.offsetTop;
 
