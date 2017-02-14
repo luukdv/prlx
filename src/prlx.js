@@ -3,7 +3,7 @@
 ((root) => {
   class Parallax {
     constructor(item, args = {}) {
-      if (!item || typeof args !== 'object' || !args.image) {
+      if (!item || typeof item !== 'string' || typeof args !== 'object' || !args.image || typeof args.image !== 'string') {
         return;
       }
 
@@ -11,27 +11,14 @@
       this._items = this._getNodes(item);
 
       this._show();
-      this._setup();
-    }
 
-    _setup() {
-      if (!this._performChecks()) {
-        return;
+      if (this._performChecks()) {
+        this._register();
+        this._init();
       }
-
-      this._register();
-      this._init();
-    }
-
-    _checkSelector(selector) {
-      return (typeof selector === 'string' && selector.length);
     }
 
     _getNodes(selector) {
-      if (!this._checkSelector(selector) || !this._checkSelector(this._image)) {
-        return false;
-      }
-
       const nodes = document.querySelectorAll(selector);
 
       if (!nodes.length) {
