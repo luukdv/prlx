@@ -148,11 +148,11 @@
     }
   }
 
-  const exp = (item, args) => new Parallax(item, args);
+  const exportable = (item, args) => new Parallax(item, args);
 
   if (typeof module === 'object') {
-    module.exports = exp;
+    module.exports = exportable;
   } else {
-    root.prlx = exp;
+    root.prlx = exportable;
   }
 })(this);
