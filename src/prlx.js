@@ -4,19 +4,21 @@
   class Parallax {
     constructor(item, args = {}) {
       if (!item || typeof args !== 'object' || !args.image) {
-        return false;
+        return;
       }
 
       this._image = args.image;
       this._items = this._getNodes(item);
 
-      if (!this._performChecks()) {
-        this._show();
+      this._show();
+      this._setup();
+    }
 
-        return false;
+    _setup() {
+      if (!this._performChecks()) {
+        return;
       }
 
-      this._show();
       this._register();
       this._init();
     }
@@ -26,7 +28,7 @@
     }
 
     _getNodes(selector) {
-      if (!this._checkSelector(selector) || !this._checkSelector(args.image)) {
+      if (!this._checkSelector(selector) || !this._checkSelector(this._image)) {
         return false;
       }
 
@@ -50,10 +52,6 @@
     }
 
     _performChecks() {
-      if (!this._items) {
-        return false;
-      }
-
       // DOM painting is paused during scroll events on iOS7
       if (/iP(ad|hone|od).*OS\s7.*/.test(navigator.userAgent)) {
         return false;
@@ -84,11 +82,19 @@
     }
 
     _show() {
+      if (!this._items) {
+        return;
+      }
+
       function display(node) {
         node.style.display = 'block';
       }
 
-      this._loop(this._items, item => display(item.image));
+      this._loop(this._items, item => {
+        if (item.image) {
+          display(item.image);
+        }
+      });
     }
 
     _register() {
