@@ -18,7 +18,7 @@
   },
   "scripts": {
     "dev": "./node_modules/.bin/babel src/prlx.js -w -o dist/prlx.js",
-    "build": "uglifyjs dist/prlx.js -c -m -o dist/prlx.js"
+    "build": "uglifyjs dist/prlx.js -c -m -r 'recalculate' -o dist/prlx.js"
   },
   "babel": {
     "plugins": [
