@@ -1,28 +1,33 @@
-# Parallax background
+# prlx
 
-A small (less than 1KB), performance optimized jQuery plugin for parallax image backgrounds. Aims to be as straight forward and semantic as possible, without tricks, hacks, element clones, layout thrashing, etc.
+A small (~1KB gzip), performance optimized tool for parallax image backgrounds. Aims to be as straight forward and semantic as possible, without tricks, hacks, element clones, layout thrashing, etc.
 
 ## Installation
 
-### Bower
+Yarn:
 
 ```sh
-bower install luukdv/parallax-background --save
+yarn add prlx
 ```
 
-### Manual
+NPM:
+
+```sh
+npm install prlx --save
+```
+
+Manually:
 
 ```html
-<script src="parallax-background.js"></script>
+<script src="dist/prlx.js"></script>
 ```
 
-## Configuration
+## Arguments
 
-### Options
-
-| Option | Default value | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `image` | `undefined` | Yes | Selector string which can be picked up by jQuery
+| Argument | Required | Description |
+| :--- | :--- | :--- |
+| `item` | Yes | Selector string for parent element
+| `image` | Yes | Selector string for image element inside parent
 
 ## Usage
 
@@ -35,14 +40,12 @@ bower install luukdv/parallax-background --save
 ```
 
 ```js
-$('.example').parallaxBackground({
-  'image': '.img'
-});
+new Prlx('.example', '.img');
 ```
 
 ### Styling
 
-This plugin is intented to be used for image backgrounds. There has to be a parent element (to hide the parallax overflow), and a child element. See example above. Naturally, some styling has to be involved. There isn't any bundled CSS file or activated style through JavaScript, to give as much freedom as possible. However, these are the recommended style rules:
+This plugin is intented to be used for image backgrounds. There has to be a parent element (to hide the parallax overflow), and a child element. See example above. Naturally, some styling has to be involved. There isn't any bundled CSS file or activated style through JavaScript, to give as much freedom as possible. However, these are required style rules:
 
 ```scss
 $parallax-space: 20%; // Example, can be anything
@@ -53,20 +56,41 @@ $parallax-space: 20%; // Example, can be anything
   position: relative;
 
   .img {
-  	background-image: url('image.jpg');
-    background-position: 50%;
-    background-size: cover;
-    display: none; /* 1 */
+    background-image: url('image.jpg');
     height: 100% + $parallax-space;
-    position: absolute; /* 2 */
+    position: absolute; /* 1 */
     top: -($parallax-space / 2);
     width: 100%; // Example, can be anything
   }
 }
 ```
 
-1. When you load JavaScript in the footer/async/defer, it's a good idea to initially hide the image element. This will solve the (minimal) visual change of the image's position after the page is done loading.
-2. Absolute positioning is the best option for optimal animation performance.
+These are additional recommended styles rules:
+
+```scss
+.example {
+  .img {
+    background-position: 50%;
+    background-size: cover;
+    display: none; /* 2 */
+    will-change: transform; /* 3 */
+  }
+}
+```
+
+1. Absolute positioning is the best option for optimal animation performance.
+2. When you load JavaScript in the footer/async/defer, it's a good idea to initially hide the image element. This will solve the (minimal) visual change of the image's position after the page is done loading.
+3. Will create a dedicated paint layer for the parallax animation.
+
+### Manual recalculation
+
+When there are other libraries/scripts at work who influence the DOM after `prlx` is done calculating its values, it may be necessary to recalculate values. This can be done at any time:
+
+```js
+const example = new Prlx('.example', '.img');
+...
+example.recalculate();
+```
 
 ## Support
 
