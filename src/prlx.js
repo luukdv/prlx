@@ -1,9 +1,9 @@
 'use strict';
 
 ((root) => {
-  const Prlx = function(item, image) {
+  const prlx = (item, image) => {
     if (!item || !image) {
-      return;
+      return false;
     }
 
     const items = getNodes(item);
@@ -12,7 +12,7 @@
     if (items) {
       show();
     } else {
-      return;
+      return false;
     }
 
     if (performChecks()) {
@@ -148,8 +148,8 @@
   }
 
   if (typeof module === 'object') {
-    module.exports = Prlx;
+    module.exports = prlx;
   } else {
-    root.Prlx = Prlx;
+    root.prlx = prlx;
   }
 })(this);
