@@ -1,4 +1,4 @@
-# Parallax background
+# prlx
 
 A small (1KB gzip), performance optimized tool for parallax image backgrounds. Aims to be as straight forward and semantic as possible, without tricks, hacks, element clones, layout thrashing, etc.
 
@@ -56,7 +56,7 @@ $parallax-space: 20%; // Example, can be anything
   position: relative;
 
   .img {
-  	background-image: url('image.jpg');
+    background-image: url('image.jpg');
     height: 100% + $parallax-space;
     position: absolute; /* 1 */
     top: -($parallax-space / 2);
@@ -88,9 +88,7 @@ When there are other libraries/scripts at work who influence the DOM after `prlx
 
 ```js
 const example = new Prlx('.example', '.img');
-
 ...
-
 example.recalculate();
 ```
 
