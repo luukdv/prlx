@@ -1,8 +1,11 @@
 {
   "name": "prlx",
-  "version": "",
-  "description": "",
-  "keywords": [],
+  "version": "0.1.3",
+  "description": "Small, performance optimized tool for parallax image backgrounds.",
+  "keywords": [
+    "parallax",
+    "scroll"
+  ],
   "homepage": "https://github.com/luukdv/parallax-background",
   "bugs": {
     "url": "https://github.com/luukdv/parallax-background/issues"
