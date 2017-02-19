@@ -1,6 +1,6 @@
 {
   "name": "prlx",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "description": "Small, performance optimized tool for parallax image backgrounds.",
   "keywords": [
     "parallax",
