@@ -6,9 +6,9 @@
     "parallax",
     "scroll"
   ],
-  "homepage": "https://github.com/luukdv/parallax-background",
+  "homepage": "https://github.com/luukdv/prlx",
   "bugs": {
-    "url": "https://github.com/luukdv/parallax-background/issues"
+    "url": "https://github.com/luukdv/prlx/issues"
   },
   "license": "MIT",
   "author": {
@@ -17,7 +17,7 @@
   "main": "dist/prlx.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/luukdv/parallax-background.git"
+    "url": "https://github.com/luukdv/prlx.git"
   },
   "scripts": {
     "build": "uglifyjs dist/prlx.js -c -m -r 'recalculate' -o dist/prlx.js",
