@@ -1,28 +1,29 @@
 'use strict';
 
 ((root) => {
-  class Parallax {
-    constructor(item, image) {
-      if (!item || !image) {
-        return;
-      }
-
-      this._image = image;
-      this._items = this._getNodes(item);
-
-      if (this._items) {
-        this._show();
-      } else {
-        return;
-      }
-
-      if (this._performChecks()) {
-        this._register();
-        this._init();
-      }
+  const Prlx = function(item, image) {
+    if (!item || !image) {
+      return;
     }
 
-    _getNodes(selector) {
+    const items = getNodes(item);
+
+    if (items) {
+      show();
+    } else {
+      return;
+    }
+
+    if (performChecks()) {
+      register();
+      init();
+    }
+
+    /**
+     * Internal methods
+     */
+
+    function getNodes(selector) {
       const nodes = document.querySelectorAll(selector);
 
       if (!nodes.length) {
@@ -31,18 +32,18 @@
 
       const items = [];
 
-      this._loopNodes(nodes, node => {
+      loopNodes(nodes, node => {
         items.push({parent: node});
       });
 
-      this._loop(items, item => {
-        item.image = item.parent.querySelector(this._image);
+      loop(items, item => {
+        item.image = item.parent.querySelector(image);
       });
 
       return items;
     }
 
-    _performChecks() {
+    function performChecks() {
       if (typeof requestAnimationFrame !== 'function') {
         return false;
       }
@@ -55,13 +56,13 @@
       return true;
     }
 
-    _loop(items, callback) {
+    function loop(items, callback) {
       for (let i = 0; i < items.length; i++) {
         callback(items[i]);
       }
     }
 
-    _loopNodes(nodes, callback) {
+    function loopNodes(nodes, callback) {
       // Check if it's a single node
       if (!nodes.length) {
         callback(nodes);
@@ -69,51 +70,51 @@
         return;
       }
 
-      this._loop(nodes, callback);
+      loop(nodes, callback);
     }
 
-    _show() {
+    function show() {
       function display(node) {
         node.style.display = 'block';
       }
 
-      this._loop(this._items, item => {
+      loop(items, item => {
         if (item.image) {
           display(item.image);
         }
       });
     }
 
-    _register() {
-      this._calculate();
+    function register() {
+      calculate();
 
-      window.addEventListener('resize', () => this._calculate());
+      window.addEventListener('resize', () => calculate());
     }
 
-    _getHeight(node) {
+    function getHeight(node) {
       return node.getBoundingClientRect().height;
     }
 
-    _calculate() {
+    function calculate() {
       const windowHeight = window.innerHeight;
 
-      this._items.forEach(i => {
+      items.forEach(i => {
         if (!i.image) {
           return;
         }
 
-        const height = this._getHeight(i.parent);
+        const height = getHeight(i.parent);
         const offset = i.parent.offsetTop;
 
         i.distanceToVisible = offset - windowHeight;
         i.height = height;
         i.offset = i.parent.offsetTop;
-        i.parallaxSpace = this._getHeight(i.image) - height;
+        i.parallaxSpace = getHeight(i.image) - height;
         i.scrollSpace = height + windowHeight;
       });
     }
 
-    _animate(i, scrollTop) {
+    function animate(i, scrollTop) {
       const inSight = scrollTop >= i.distanceToVisible;
       const outOfSight = scrollTop >= (i.height + i.offset);
 
@@ -129,30 +130,31 @@
       i.image.style.transform = `translateY(${translate * -1}px`;
     }
 
-    _tick() {
+    function tick() {
       requestAnimationFrame(() => {
         const scrollTop = window.pageYOffset;
 
-        this._items.forEach(i => this._animate(i, scrollTop));
-        this._tick();
+        items.forEach(i => animate(i, scrollTop));
+        tick();
       });
     }
 
-    _init() {
-      this._tick();
+    function init() {
+      tick();
     }
 
-    // Public API
-    recalculate() {
-      this._calculate();
+    /**
+     * Public API
+     */
+
+    function recalculate() {
+      calculate();
     }
   }
 
-  const exportable = (item, image) => new Parallax(item, image);
-
   if (typeof module === 'object') {
-    module.exports = exportable;
+    module.exports = Prlx;
   } else {
-    root.prlx = exportable;
+    root.Prlx = Prlx;
   }
 })(this);
