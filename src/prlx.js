@@ -7,6 +7,7 @@
     }
 
     const items = getNodes(item);
+    const transformType = 'webkitTransform' in document.body.style ? 'webkitTransform' : 'transform';
 
     if (items) {
       show();
@@ -123,7 +124,7 @@
       const animatePerPixel = i.parallaxSpace / i.scrollSpace;
       let translate = parseFloat((amount * animatePerPixel).toFixed(1));
 
-      i.image.style.transform = `translateY(${translate * -1}px)`;
+      i.image.style[transformType] = `translateY(${translate * -1}px)`;
     }
 
     function tick() {
