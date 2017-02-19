@@ -45,7 +45,7 @@ new Prlx('.example', '.img');
 
 ### Styling
 
-This plugin is intented to be used for image backgrounds. There has to be a parent element (to hide the parallax overflow), and a child element. See example above. Naturally, some styling has to be involved. There isn't any bundled CSS file or activated style through JavaScript, to give as much freedom as possible. However, these are required style rules:
+This plugin is intented to be used for image backgrounds. There has to be a parent element (to hide the parallax overflow), and a child element. See example above. Naturally, some styling has to be involved. There isn't any bundled CSS file or activated style through JavaScript, to give as much freedom as possible. However, these are the required style rules to work as intended:
 
 ```scss
 $parallax-space: 20%; // Example, can be anything
