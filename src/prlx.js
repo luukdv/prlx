@@ -2,15 +2,19 @@
 
 ((root) => {
   class Parallax {
-    constructor(item, args = {}) {
-      if (!item || typeof item !== 'string' || typeof args !== 'object' || !args.image || typeof args.image !== 'string') {
+    constructor(item, image) {
+      if (!item || !image) {
         return;
       }
 
-      this._image = args.image;
+      this._image = image;
       this._items = this._getNodes(item);
 
-      this._show();
+      if (this._items) {
+        this._show();
+      } else {
+        return;
+      }
 
       if (this._performChecks()) {
         this._register();
@@ -39,12 +43,12 @@
     }
 
     _performChecks() {
-      // DOM painting is paused during scroll events on iOS7
-      if (/iP(ad|hone|od).*OS\s7.*/.test(navigator.userAgent)) {
+      if (typeof requestAnimationFrame !== 'function') {
         return false;
       }
 
-      if (!requestAnimationFrame) {
+      // DOM painting is paused during scroll events on iOS7
+      if (/iP(ad|hone|od).*OS\s7.*/.test(navigator.userAgent)) {
         return false;
       }
 
@@ -69,10 +73,6 @@
     }
 
     _show() {
-      if (!this._items) {
-        return;
-      }
-
       function display(node) {
         node.style.display = 'block';
       }
@@ -148,7 +148,7 @@
     }
   }
 
-  const exportable = (item, args) => new Parallax(item, args);
+  const exportable = (item, image) => new Parallax(item, image);
 
   if (typeof module === 'object') {
     module.exports = exportable;
