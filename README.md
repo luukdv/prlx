@@ -40,7 +40,7 @@ Manually:
 ```
 
 ```js
-new Prlx('.example', '.img');
+prlx('.example', '.img');
 ```
 
 ### Styling
@@ -87,7 +87,7 @@ These are additional recommended styles rules:
 When there are other libraries/scripts at work who influence the DOM after `prlx` is done calculating its values, it may be necessary to recalculate values. This can be done at any time:
 
 ```js
-const example = new Prlx('.example', '.img');
+const example = prlx('.example', '.img');
 ...
 example.recalculate();
 ```
