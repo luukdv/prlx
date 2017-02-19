@@ -121,7 +121,7 @@
       const visible = scrollTop - i.distanceToVisible;
       const amount = visible - (i.scrollSpace / 2); // Center at middle of viewport
       const animatePerPixel = i.parallaxSpace / i.scrollSpace;
-      let translate = (amount * animatePerPixel).toFixed(1);
+      let translate = parseFloat((amount * animatePerPixel).toFixed(1));
 
       i.image.style.transform = `translateY(${translate * -1}px)`;
     }
