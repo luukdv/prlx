@@ -20,9 +20,8 @@
     "url": "https://github.com/luukdv/prlx.git"
   },
   "scripts": {
-    "build": "uglifyjs dist/prlx.js -c -m -r 'recalculate' -o dist/prlx.js",
+    "build": "uglifyjs dist/prlx.js -c -m -r 'prlx,recalculate' -o dist/prlx.js",
     "dev": "./node_modules/.bin/babel src/prlx.js -w -o dist/prlx.js",
-    "install": "npm run dev",
     "prepublish": "npm run build"
   },
   "babel": {
