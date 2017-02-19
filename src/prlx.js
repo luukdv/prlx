@@ -19,10 +19,6 @@
       init();
     }
 
-    /**
-     * Internal methods
-     */
-
     function getNodes(selector) {
       const nodes = document.querySelectorAll(selector);
 
@@ -143,12 +139,10 @@
       tick();
     }
 
-    /**
-     * Public API
-     */
-
-    function recalculate() {
-      calculate();
+    return {
+      recalculate() {
+        calculate();
+      }
     }
   }
 
