@@ -123,7 +123,7 @@
       const animatePerPixel = i.parallaxSpace / i.scrollSpace;
       let translate = (amount * animatePerPixel).toFixed(1);
 
-      i.image.style.transform = `translateY(${translate * -1}px`;
+      i.image.style.transform = `translateY(${translate * -1}px)`;
     }
 
     function tick() {
